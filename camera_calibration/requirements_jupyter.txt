@@ -1,0 +1,5 @@
+ipympl
+jupyter
+matplotlib
+numpy
+pandas

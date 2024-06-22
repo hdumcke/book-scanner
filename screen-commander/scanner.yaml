@@ -1,0 +1,5 @@
+scanner:
+  left:
+    - ssh 192.168.1.46
+  right:
+    - ssh 192.168.1.44

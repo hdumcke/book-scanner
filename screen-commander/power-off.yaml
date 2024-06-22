@@ -1,0 +1,5 @@
+scanner:
+  left:
+    - sudo poweroff
+  right:
+    - sudo poweroff

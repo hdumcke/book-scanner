@@ -1,0 +1,15 @@
+scanner:
+  left:
+    - touch left.done
+    - libcamera-still -r on -o left.jpg
+    - scp left.dng 192.168.1.32:/tmp/
+    - scp left.jpg 192.168.1.32:/tmp/
+    - scp left.done 192.168.1.32:/tmp/
+    - rm left.*
+  right:
+    - touch right.done
+    - libcamera-still -r on -o right.jpg
+    - scp right.dng 192.168.1.32:/tmp/
+    - scp right.jpg 192.168.1.32:/tmp/
+    - scp right.done 192.168.1.32:/tmp/
+    - rm right.*
