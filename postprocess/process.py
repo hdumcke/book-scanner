@@ -19,6 +19,13 @@ with open(os.path.join(calibatrion_dir, 'left_camera.yaml')) as f:
     mtx.append(loadeddict.get('camera_matrix'))
     dist.append(loadeddict.get('dist_coeff'))
 
+# Adapt camera matrix for twice as many pixel as used during calibration
+for i in range(2):
+    mtx[i][0][0] = 2.0 * mtx[i][0][0]
+    mtx[i][0][2] = 2.0 * mtx[i][0][2]
+    mtx[i][1][1] = 2.0 * mtx[i][1][1]
+    mtx[i][1][2] = 2.0 * mtx[i][1][2]
+
 mtx = np.array(mtx)
 dist = np.array(dist)
 
@@ -39,11 +46,11 @@ for i in range(num_of_files):
 
 #    import pdb
 #    pdb.set_trace()
-    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx[i % 2], dist[i % 2], (w, h), 1, (w, h))
-    dst = cv2.undistort(gray, mtx[i % 2], dist[i % 2], None, newcameramtx)
-    #dst = cv2.undistort(gray, mtx[i % 2], dist[i % 2], None, mtx[i % 2])
+#    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx[i % 2], dist[i % 2], (w, h), 1, (w, h))
+#    dst = cv2.undistort(gray, mtx[i % 2], dist[i % 2], None, newcameramtx)
+    dst = cv2.undistort(gray, mtx[i % 2], dist[i % 2], None)
     cv2.imshow("Undistorted", dst)
-    #cv2.imshow("Distorted", gray)
+    cv2.imshow("Distorted", gray)
     cv2.waitKey(0)
 
 cv2.destroyAllWindows()
